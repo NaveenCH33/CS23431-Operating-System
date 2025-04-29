@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Memory Simulator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <header class="header">
+            <h1 class="animate__animated animate__fadeIn">Virtual Memory Simulator</h1>
+            <div class="status-indicators">
+                <div class="status-item">
+                    <span class="status-dot hit-dot"></span>
+                    <span class="status-label">HIT - Page in Memory</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-dot fault-dot"></span>
+                    <span class="status-label">MISS - Page Fault</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="control-panel">
+                <div class="panel-section">
+                    <h2>Configuration</h2>
+                    <form id="simulationForm" class="config-form">
+                        <div class="form-group">
+                            <label for="pages">Page Sequence</label>
+                            <input type="text" class="form-control" id="pages" required 
+                                   placeholder="e.g., 1,2,3,4,1,2,5,1,2,3,4,5">
+                            <div class="input-help">Enter page numbers separated by commas</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="frames">Memory Frames</label>
+                            <input type="number" class="form-control" id="frames" required min="1" value="3">
+                            <div class="input-help">Number of available memory frames</div>
+                        </div>
+                        
+                        <button type="submit" class="btn-simulate">
+                            <span class="btn-text">Compare All Algorithms</span>
+                            <span class="btn-icon">▶</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="results" class="results-panel" style="display: none;">
+                <div class="results-container">
+                    <div class="comparison-section">
+                        <h2>Algorithm Comparison</h2>
+                        <div class="comparison-grid">
+                            <div class="comparison-card">
+                                <h3>FIFO</h3>
+                                <div class="table-wrapper">
+                                    <table class="operations-table" id="fifoTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Step</th>
+                                                <th>Page</th>
+                                                <th>Memory</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="comparison-card">
+                                <h3>LRU</h3>
+                                <div class="table-wrapper">
+                                    <table class="operations-table" id="lruTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Step</th>
+                                                <th>Page</th>
+                                                <th>Memory</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="comparison-card">
+                                <h3>Optimal</h3>
+                                <div class="table-wrapper">
+                                    <table class="operations-table" id="optimalTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Step</th>
+                                                <th>Page</th>
+                                                <th>Memory</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-section">
+                        <h2>Performance Analysis</h2>
+                        <div class="graph-container">
+                            <div class="graph-card">
+                                <h3>Page Faults Over Time</h3>
+                                <div style="position: relative; height: 300px;">
+                                    <canvas id="pageFaultsChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="graph-card">
+                                <h3>Memory State Size</h3>
+                                <div style="position: relative; height: 300px;">
+                                    <canvas id="memorySizeChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="graph-card">
+                                <h3>Hit Rate Comparison</h3>
+                                <div style="position: relative; height: 300px;">
+                                    <canvas id="hitRateChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Load Chart.js first -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <!-- Then load Bootstrap and our script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
