@@ -6,7 +6,7 @@ A web application that simulates virtual memory management using different page 
 
 - Input a page reference string (sequence of page numbers)
 - Set the number of available memory frames
-- Choose between FIFO and LRU page replacement algorithms
+- Choose between FIFO,LRU and Optimal page replacement algorithms
 - View step-by-step simulation results
 - See memory state changes and page fault statistics
 - Visual chart showing page faults over time
@@ -29,7 +29,7 @@ python app.py
 
 1. Enter a comma-separated list of page numbers (e.g., 1,2,3,4,1,2,5,1,2,3,4,5)
 2. Specify the number of memory frames available
-3. Select the desired page replacement algorithm (FIFO or LRU)
+3. Select the desired page replacement algorithm (FIFO,LRU and Optimal)
 4. Click "Run Simulation" to see the results
 
 ## Technologies Used
